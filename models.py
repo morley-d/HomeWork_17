@@ -1,3 +1,4 @@
+"""Модели для SQLAlchemy"""
 from setup_db import db
 
 

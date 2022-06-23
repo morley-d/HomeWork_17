@@ -22,7 +22,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "superka"
+  "name": "kusturica"
 }
 
 ###
