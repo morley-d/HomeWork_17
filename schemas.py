@@ -8,10 +8,10 @@ class MovieSchema(Schema):
     trailer = fields.Str()
     year = fields.Int()
     rating = fields.Float()
-    genre_id = fields.Int()
-    director_id = fields.Int()
-    # genre = fields.Str()
-    # director = fields.Str()
+    # genre_id = fields.Int()
+    # director_id = fields.Int()
+    genre = fields.Str()
+    director = fields.Str()
 
 
 movie_schema = MovieSchema()

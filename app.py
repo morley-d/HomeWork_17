@@ -26,10 +26,10 @@ genre_ns = api.namespace("genres")
 @movie_ns.route('/')
 class MoviesView(Resource):
     def get(self):
-        all_movies = Movie.query
-        # all_movies = db.session.query(Movie.id, Movie.title, Movie.description, Movie.rating,
-        #                              Movie.trailer, Genre.name.label('genre'),
-        #                              Director.name.label('director')).join(Genre).join(Director)
+        # all_movies = Movie.query
+        all_movies = db.session.query(Movie.id, Movie.title, Movie.description, Movie.rating,
+                                     Movie.trailer, Genre.name.label('genre'),
+                                     Director.name.label('director')).join(Genre).join(Director)
         if 'director_id' in request.args:
             did = request.args.get('director_id')
             all_movies = all_movies.filter(Movie.director_id == did)
@@ -49,11 +49,11 @@ class MoviesView(Resource):
 @movie_ns.route('/<int:mid>')
 class MovieView(Resource):
     def get(self, mid):
-        one_movie = Movie.query.get(mid)
-        # one_movie = db.session.query(Movie.id, Movie.title, Movie.description, Movie.rating,
-        #                              Movie.trailer, Genre.name.label('genre'),
-        #                              Director.name.label('director')).join(Genre).join(Director).filter(
-        #     Movie.id == mid).first()
+        # one_movie = Movie.query.get(mid)
+        one_movie = db.session.query(Movie.id, Movie.title, Movie.description, Movie.rating,
+                                     Movie.trailer, Genre.name.label('genre'),
+                                     Director.name.label('director')).join(Genre).join(Director).filter(
+                                     Movie.id == mid).one()
         if not one_movie:
             return "Нет такого фильма", 404
         return movie_schema.dump(one_movie), 200
