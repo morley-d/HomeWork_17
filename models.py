@@ -1,4 +1,4 @@
-from app import db
+from setup_db import db
 
 
 class Movie(db.Model):

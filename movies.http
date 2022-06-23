@@ -13,7 +13,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:5000/movies/
+GET http://localhost:5000/movies/?genre_id=4&director_id=2
 Accept: application/json
 
 ###
@@ -38,7 +38,7 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:5000/movies/1
+DELETE http://localhost:5000/movies/21
 Accept: application/json
 
 ###
