@@ -9,6 +9,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['RESTX_JSON'] = {'ensure_ascii': False, 'indent': 2}
 
+MOVIE_PER_PAGE = 5
+
 # связываем контекст с основным приложением
 app.app_context().push()
 
@@ -36,6 +38,9 @@ class MoviesView(Resource):
         if 'genre_id' in request.args:
             gid = request.args.get('genre_id')
             all_movies = all_movies.filter(Movie.genre_id == gid)
+        if 'page' in request.args:
+            num_page = int(request.args.get('page'))
+            all_movies = all_movies.limit(MOVIE_PER_PAGE).offset((num_page - 1) * MOVIE_PER_PAGE)
         return movies_schema.dump(all_movies), 200
 
     def post(self):
@@ -174,4 +179,4 @@ class GenreView(Resource):
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5002, debug=True)
